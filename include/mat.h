@@ -20,7 +20,7 @@ typedef struct mat{
 void criaMatriz(mat_tipo * mat, int tx, int ty);
 void inicializaMatrizNula(mat_tipo * mat);
 void leMatriz(std::string arq_nome, mat_tipo* mat);
-void imprimeMatriz(mat_tipo * mat);
+void imprimeMatriz(std::string arq_nome, mat_tipo * mat);
 void escreveElemento(mat_tipo * mat, int x, int y, double v);
 double leElemento (mat_tipo * mat, int x, int y);
 void copiaMatriz(mat_tipo * src, mat_tipo * dst);

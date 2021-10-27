@@ -73,28 +73,30 @@ void leMatriz(std::string arq_nome, mat_tipo* mat) {
   arq.close();
 }
 
-void imprimeMatriz(mat_tipo * mat)
+void imprimeMatriz(std::string arq_nome, mat_tipo * mat)
 // Descricao: imprime a matriz com a identificacao de linhas e colunas
 // Entrada: mat
 // Saida: impressao na saida padrao (stdout) 
 {
   int i,j;
+  FILE* arq = fopen(arq_nome.c_str(),"w");
   
   // imprime os identificadores de coluna
-  printf("%9s"," ");
+  fprintf(arq,"%9s"," ");
   for(j=0; j<mat->tamy; j++)
-    printf("%8d ",j);
-  printf("\n");
+    fprintf(arq,"%8d ",j);
+  fprintf(arq,"\n");
 
   // imprime as linhas
   for (i=0; i<mat->tamx; i++){
-    printf("%8d ",i);
+    fprintf(arq,"%8d ",i);
     for(j=0; j<mat->tamy; j++){
-      printf("%8.2f ",mat->m[i][j]);
+      fprintf(arq,"%8.2f ",mat->m[i][j]);
       leMemLog((long int)(&(mat->m[i][j])),sizeof(double));
     }
-    printf("\n");
+    fprintf(arq,"\n");
   }
+  fclose(arq);
 }
 
 void escreveElemento(mat_tipo * mat, int x, int y, double v)
