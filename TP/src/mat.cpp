@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -58,18 +59,32 @@ void inicializaMatrizNula(mat_tipo * mat)
 
 void leMatriz(std::string arq_nome, mat_tipo* mat) {
   std::ifstream arq(arq_nome);
+  std::string str;
+  getline(arq,str);
+  std::istringstream istr(str);
+  char aux;
   int tx, ty;
-  arq >> tx >> ty;
+  istr >> tx >> ty;
+  erroAssert(istr.good() || istr.eof(), "Os dois primeiros valores do arquivo devem ser o tamanho da matriz.");
+  erroAssert(tx>=0&&ty>=0,"Tamanho de matriz invalido.");
+  istr >> aux;
+  erroAssert(istr.eof(),"Arquivo de matriz invalido.");
   criaMatriz(mat,tx,ty);
 
   for(int i = 0; i < tx; i++){
+    getline(arq,str);
+    istr.str(str);
+    istr.clear();
     for(int j = 0; j < ty; j++){
       double v;
-      arq >> v;
+      erroAssert(istr >> v && (istr.good() || istr.eof()), "Arquivo de matriz invalido.");
       escreveElemento(mat, i, j, v);
     }
+    istr >> aux;
+    erroAssert(istr.eof(),"Arquivo de matriz invalido.");
   }
-
+  char c;
+  erroAssert(!(arq >> c), "Arquivo de matriz invalido." );
   arq.close();
 }
 
