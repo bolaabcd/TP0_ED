@@ -66,6 +66,7 @@ void parse_args(int argc,char ** argv)
   opt1nome[0] = 0;
   opt2nome[0] = 0;
   lognome[0] = 0;
+  bool p = false, um = false, dois = false, o = false;
 
   // getopt - letra indica a opcao, : junto a letra indica parametro
   // no caso de escolher mais de uma operacao, vale a ultima
@@ -84,18 +85,26 @@ void parse_args(int argc,char ** argv)
         opescolhida = OPTRANSPOR;
         break;
       case 'p': 
+        avisoAssert(!p,"Mais de um arquivo de registro passado, o ultimo sera usado.");
+        p = true;
         lognome = optarg;
         break;
       case '1': 
+        avisoAssert(!um,"Mais de um arquivo de primeira matriz passado, o ultimo sera usado.");
+        um = true;
         opt1nome = optarg;
         break;
       case '2': 
+        avisoAssert(!dois,"Mais de um arquivo de segunda matriz passado, o ultimo sera usado.");
+        dois = true;
         opt2nome = optarg;
         break;
       case 'l': 
         regmem = 1;
         break;
       case 'o':
+        avisoAssert(!o,"Mais de um arquivo de saida passado, o ultimo sera usado.");
+        o = true;
         outnome = optarg;
         break;
       case 'h':
