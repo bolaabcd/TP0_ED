@@ -31,15 +31,14 @@ void uso()
 // Saida: impressao das opcoes de linha de comando
 {
   fprintf(stderr,"matop\n");
-  fprintf(stderr,"\t-s \t\t(somar matrizes) \n");
-  fprintf(stderr,"\t-m \t\t(multiplicar matrizes) \n");
-  fprintf(stderr,"\t-t \t\t(transpor matriz)\n");
-  fprintf(stderr,"\t-p <arq>\t(arquivo de registro de acesso)\n");
-  fprintf(stderr,"\t-l \t\t(registrar acessos a memoria)\n");
-  fprintf(stderr,"\t-1 <arq>\t(arquivo da primeira matriz)\n");
-  fprintf(stderr,"\t-2 <arq>\t(arquivo da segunda matriz)\n");
-  fprintf(stderr,"\t-o <arq>\t(arquivo da matriz de saida)\n");
-  fprintf(stderr,"\t-h \t\t(obter ajuda) \n");
+  fprintf(stderr,"\t-s \t\t(soma matrizes) \n");
+  fprintf(stderr,"\t-m \t\t(multiplica matrizes) \n");
+  fprintf(stderr,"\t-t \t\t(transpoe matriz 1)\n");
+  fprintf(stderr,"\t-1 <arq>\t(matriz 1)\n");
+  fprintf(stderr,"\t-2 <arq>\t(matriz 2)\n");
+  fprintf(stderr,"\t-o <arq>\t(matriz resultante)\n");
+  fprintf(stderr,"\t-p <arq>\t(registro de desempenho)\n");
+  fprintf(stderr,"\t-l \t\t(padrao de acesso e localidade)\n");
 }
 
 
