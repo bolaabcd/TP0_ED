@@ -25,11 +25,10 @@ TARGET = $(BIN_FOLDER)/matop
 HDR_FILES = $(INCLUDE_FOLDER)/mat.h $(INCLUDE_FOLDER)/memlog.h $(INCLUDE_FOLDER)/msgassert.h
 OBJ_FILES = $(OBJ_FOLDER)/matop.o $(OBJ_FOLDER)/mat.o $(OBJ_FOLDER)/memlog.o
 
-all: $(OBJ_FILES)
-	$(CC) -o $(TARGET) $(OBJ_FILES)
+all: $(TARGET)
 
-$(BIN_FOLDER)/matop: $(OBJ_FILES)
-	$(CC) -o $(BIN_FOLDER)/matop $(LIBS) $(OBJ_FILES) 
+$(TARGET): $(OBJ_FILES)
+	$(CC) -o $(TARGET) $(LIBS) $(OBJ_FILES)
 
 $(OBJ_FOLDER)/matop.o: $(HDR_FILES) $(SRC_FOLDER)/matop.cpp
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/matop.o $(SRC_FOLDER)/matop.cpp 
