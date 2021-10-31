@@ -124,19 +124,15 @@ void imprimeMatriz(std::string arq_nome, mat_tipo *mat)
   erroAssert(mat->m != nullptr, "Matriz nao foi criada.");
   erroAssert(arq, "Arquivo de escrita de matriz inexistente ou invalido.");
 
-  // imprime os identificadores de coluna
-  fprintf(arq, "%9s", " ");
-  for (j = 0; j < mat->tamy; j++)
-    fprintf(arq, "%8d ", j);
-  fprintf(arq, "\n");
+  // imprime o tamanho da matriz
+  fprintf(arq, "%d %d\n", mat->tamx, mat->tamy);
 
   // imprime as linhas
   for (i = 0; i < mat->tamx; i++)
   {
-    fprintf(arq, "%8d ", i);
     for (j = 0; j < mat->tamy; j++)
     {
-      fprintf(arq, "%8.2f ", mat->m[i][j]);
+      fprintf(arq, "%.4f ", mat->m[i][j]);
       leMemLog((long int)(&(mat->m[i][j])), sizeof(double));
     }
     fprintf(arq, "\n");
