@@ -51,7 +51,7 @@ void inicializaMatrizNula(mat_tipo *mat)
 // Saida: mat
 {
   // verifica se a matriz e valida
-  erroAssert(mat != nullptr, "Matriz nao foi criada");
+  erroAssert(mat->m != nullptr, "Matriz nao foi criada");
   // inicializa todos os elementos da matriz com 0, por seguranca
   for (int i = 0; i < mat->tamx; i++)
     for (int j = 0; j < mat->tamy; j++)
@@ -64,7 +64,7 @@ void leMatriz(std::string arq_nome, mat_tipo *mat)
 // Saida: mat
 {
   // verifica se a matriz e o arquivo sao validos
-  erroAssert(mat != nullptr, "Matriz nao foi criada.");
+  erroAssert(mat->m == nullptr, "Matriz ja foi criada.");
   std::ifstream arq(arq_nome);
   erroAssert(arq, "Arquivo de matriz inexistente ou invalido.");
 
@@ -121,7 +121,7 @@ void imprimeMatriz(std::string arq_nome, mat_tipo *mat)
   FILE *arq = fopen(arq_nome.c_str(), "w");
 
   // verifica se a matriz e o arquivo sao validos
-  erroAssert(mat != nullptr, "Matriz nao foi criada.");
+  erroAssert(mat->m != nullptr, "Matriz nao foi criada.");
   erroAssert(arq, "Arquivo de escrita de matriz inexistente ou invalido.");
 
   // imprime os identificadores de coluna
@@ -150,7 +150,7 @@ void escreveElemento(mat_tipo *mat, int x, int y, double v)
 // Saida: mat
 {
   // verifica se x, y e mat sao validos
-  erroAssert(mat != nullptr, "Matriz nao foi criada.");
+  erroAssert(mat->m != nullptr, "Matriz nao foi criada.");
   erroAssert((x >= 0) && (x < mat->tamx), "Indice invalido");
   erroAssert((y >= 0) && (y < mat->tamy), "Indice invalido");
 
@@ -164,7 +164,7 @@ double leElemento(mat_tipo *mat, int x, int y)
 // Saida: mat[x][y]
 {
   // verifica se x, y e mat sao validos
-  erroAssert(mat != nullptr, "Matriz nao foi criada.");
+  erroAssert(mat->m != nullptr, "Matriz nao foi criada.");
   erroAssert((x >= 0) && (x < mat->tamx), "Indice invalido");
   erroAssert((y >= 0) && (y < mat->tamy), "Indice invalido");
 
@@ -178,9 +178,9 @@ void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c)
 // Saida: c
 {
   // verifica se as matrizes sao validas
-  erroAssert(a != nullptr, "Matriz nao foi criada.");
-  erroAssert(b != nullptr, "Matriz nao foi criada.");
-  erroAssert(c != nullptr, "Matriz nao foi criada.");
+  erroAssert(a->m != nullptr, "Matriz nao foi criada.");
+  erroAssert(b->m != nullptr, "Matriz nao foi criada.");
+  erroAssert(c->m == nullptr, "Matriz ja foi criada.");
 
   // verifica se as dimensoes das matrizes a e b sao as mesmas
   erroAssert(a->tamx == b->tamx, "Dimensoes incompativeis");
@@ -209,9 +209,9 @@ void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c)
 // Saida: c
 {
   // verifica se as matrizes sao validas
-  erroAssert(a != nullptr, "Matriz nao foi criada.");
-  erroAssert(b != nullptr, "Matriz nao foi criada.");
-  erroAssert(c != nullptr, "Matriz nao foi criada.");
+  erroAssert(a->m != nullptr, "Matriz nao foi criada.");
+  erroAssert(b->m != nullptr, "Matriz nao foi criada.");
+  erroAssert(c->m == nullptr, "Matriz nao foi criada.");
 
   // verifica a compatibilidade das dimensoes
   erroAssert(a->tamy == b->tamx, "Dimensoes incompativeis");
@@ -242,7 +242,7 @@ void transpoeMatriz(mat_tipo *a)
 // Saida: a
 {
   // verifica se a matriz e valida
-  erroAssert(a != nullptr, "Matriz nao foi criada.");
+  erroAssert(a->m != nullptr, "Matriz nao foi criada.");
 
   // onde ficara a versao transposta
   mat_tipo b;
@@ -258,7 +258,6 @@ void transpoeMatriz(mat_tipo *a)
       escreveMemLog((long int)(&(b.m[j][i])), sizeof(double));
     }
   }
-
   destroiMatriz(a);
   *a = b;
 }
@@ -269,7 +268,7 @@ void destroiMatriz(mat_tipo *a)
 // Saida: a
 {
   // apenas um aviso se a matriz for destruida mais de uma vez
-  avisoAssert(a->m == nullptr, "Matriz ja foi destruida ou nem foi construida.");
+  avisoAssert(a->m != nullptr, "Matriz ja foi destruida ou nem foi construida.");
 
   // desaloca o espaco do heap
   for (int i = 0; i < a->tamx; i++)
