@@ -20,11 +20,12 @@ typedef struct memlog
 	clockid_t clk_id;
 	struct timespec inittime;
 	long count;
+	int regmem;
 	int fase;
 	int ativo;
 } memlog_tipo;
 
-int iniciaMemLog(std::string nome);
+int iniciaMemLog(std::string nome, int regmem);
 int ativaMemLog();
 int desativaMemLog();
 int defineFaseMemLog(int f);

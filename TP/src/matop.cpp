@@ -74,15 +74,15 @@ void parse_args(int argc, char **argv)
     switch (c)
     {
     case 'm':
-      avisoAssert(opescolhida == -1, "Mais de uma operacao escolhida.");
+      avisoAssert(opescolhida == -1, "Mais de uma operacao escolhida: a ultima sera utilizada.");
       opescolhida = OPMULTIPLICAR;
       break;
     case 's':
-      avisoAssert(opescolhida == -1, "Mais de uma operacao escolhida.");
+      avisoAssert(opescolhida == -1, "Mais de uma operacao escolhida: a ultima sera utilizada.");
       opescolhida = OPSOMAR;
       break;
     case 't':
-      avisoAssert(opescolhida == -1, "Mais de uma operacao escolhida.");
+      avisoAssert(opescolhida == -1, "Mais de uma operacao escolhida: a ultima sera utilizada.");
       opescolhida = OPTRANSPOR;
       break;
     case 'p':
@@ -139,7 +139,7 @@ int main(int argc, char **argv)
   parse_args(argc, argv);
 
   // iniciar registro de acesso
-  iniciaMemLog(lognome);
+  iniciaMemLog(lognome,regmem);
 
   // ativar registro de acesso
   ativaMemLog();

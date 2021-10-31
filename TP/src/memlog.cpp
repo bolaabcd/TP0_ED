@@ -40,13 +40,16 @@ void clkDifMemLog(struct timespec t1, struct timespec t2, struct timespec *res)
   }
 }
 
-int iniciaMemLog(std::string nome)
+int iniciaMemLog(std::string nome, int regmem)
 // Descricao: inicializa o registro de acessos, abrindo o arquivo nome
 // Entrada: nome
 // Saida: nao tem
 {
   // escolhe modo do relogio
   ml.clk_id = CLOCK_MONOTONIC;
+
+  // escolhe se deve ou nao registrar padrao de acesso a memoria
+  ml.regmem = regmem;
 
   // abre arquivo de registro e verifica se foi aberto corretamente
   ml.log = fopen(nome.c_str(), "wt");
@@ -102,7 +105,7 @@ int leMemLog(long int pos, long int tam)
 // Saida: resultado da obtencao do relogio
 {
   // verifica se registro esta ativo
-  if (ml.ativo == MLINATIVO)
+  if (ml.ativo == MLINATIVO || !ml.regmem)
     return 0;
 
   // captura tempo atual
@@ -128,7 +131,7 @@ int escreveMemLog(long int pos, long int tam)
 // Saida: resultado da obtencao do relogio
 {
   // verifica se registro esta ativo
-  if (ml.ativo == MLINATIVO)
+  if (ml.ativo == MLINATIVO || !ml.regmem)
     return 0;
 
   // captura tempo atual
